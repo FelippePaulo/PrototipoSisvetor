@@ -82,7 +82,7 @@ export function Header() {
             href="https://admin.sisvetor.sds.unb.br/"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn rounded-full border-none bg-white px-6 text-sky-900 shadow-md transition-all duration-300 hover:scale-105 hover:bg-slate-100"
+            className="btn rounded-full border-cyan-300 bg-cyan-50 text-cyan-800 shadow-lg"
             >
             <LogIn size={18} />
             Entrar
@@ -107,7 +107,8 @@ export function Header() {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="Buscar notícias..."
-                        className="w-full rounded-full px-5 py-3 text-slate-700"
+                          className="input input-bordered w-full rounded-full border-2 border-slate-300 text-slate-800 placeholder:text-slate-400 focus:border-sky-600 focus:outline-none"
+
                     />
 
                 </div>

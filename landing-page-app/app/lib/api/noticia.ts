@@ -5,7 +5,7 @@
  * permitindo a navegação e o filtro por vetor ou agravo de interesse.
  */
 export enum CategoriaVetor {
-    GERAL = "GERAL",
+    TODOS = "TODOS",
     DENGUE = "DENGUE",
     CHAGAS = "CHAGAS",
 }

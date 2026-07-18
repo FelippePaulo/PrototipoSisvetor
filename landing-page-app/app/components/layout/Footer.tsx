@@ -4,7 +4,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 py-6">
 
 
-       <p className="text-center text-xs text-white/80">
+       <p className="text-center text-xs">
           Sala de Situação | Universidade de Brasília | &copy;2026
         </p>
 

@@ -3,8 +3,8 @@ import { Link } from 'react-router';
 import { getNoticiasAtivas } from '../lib/api/noticiaController';
 import type { Noticia } from '../lib/api/noticia';
 import { slugify } from '../lib/utils';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { Header } from '../components/layout/Header';
+import { Footer } from '../components/layout/Footer';
 
 export function meta() {
   return [

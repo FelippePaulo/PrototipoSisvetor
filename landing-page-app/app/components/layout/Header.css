@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+.header{
+    @apply sticky top-0 z-50 bg-gradient-to-r from-sky-900 via-cyan-900 to-teal-900 text-white shadow-lg backdrop-blur-md;
+}
+
+.header-navbar{
+    @apply mx-auto h-20 max-w-7xl px-6;
+}
+
+.header-logo{
+    @apply h-16 w-28 object-contain;
+}
+
+.header-menu{
+    @apply gap-4 font-semibold text-[15px];
+}
+
+.header-actions{
+    @apply gap-2;
+}
+
+.header-search-button{
+    @apply rounded-full text-white transition-all hover:bg-white/20;
+}
+
+.header-login-button{
+    @apply rounded-full border-none bg-white px-6 text-sky-900 shadow-md transition-all duration-300 hover:scale-105 hover:bg-slate-100;
+}
+
+.header-search {
+    @apply overflow-hidden transition-all duration-300 ease-in-out;
+    max-height: 0;
+}
+
+.header-search-open {
+    max-height: 10rem;
+}
+
+.header-search-container {
+    @apply border-t border-white/10 bg-white shadow-md;
+}
+
+.header-search-content {
+    @apply mx-auto max-w-7xl px-6 py-4;
+}
+
+.header-search-input {
+     @apply w-full rounded-full px-5 py-3 text-slate-700;
+}

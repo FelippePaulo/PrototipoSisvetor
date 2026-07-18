@@ -4,13 +4,10 @@ export function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-6 py-6">
 
 
-        <p className="text-sm font-medium">
-          Sala de Situação - Universidade de Brasília
+       <p className="text-center text-xs text-white/80">
+          Sala de Situação | Universidade de Brasília | &copy;2026
         </p>
 
-        <p className="text-center text-xs text-white/80">
-          &copy;2026. Todos os direitos reservados.
-        </p>
 
       </div>
     </footer>

@@ -1,7 +1,5 @@
 import { LogIn, Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import "./Header.css"
-
 
 export function Header() {
 
@@ -29,27 +27,25 @@ export function Header() {
     }, []);
 
   return (
-<header ref={headerRef} className="header">      
-    <div className="header-navbar navbar">
+<header ref={headerRef} className="sticky top-0 z-50 bg-gradient-to-r from-sky-900 via-cyan-900 to-teal-900 text-white shadow-lg backdrop-blur-md">      
+    <div className="navbar mx-auto h-20 max-w-7xl px-6">
 
         {/* Logo */}
         <div className="navbar-start">
             <div className="flex flex-col">
 
-                <span className="text-3xl font-black tracking-tight">
                     <img
                     src="/logo_sisvetor_branco.png"
                     alt="Logo SisVetor"
                     className="h-16 w-28 object-contain"
                     />
-                </span>
 
             </div>
         </div>
 
         {/* Menu Desktop */}
         <div className="navbar-center hidden lg:flex">
-        <ul className="header-menu menu menu-horizontal">
+        <ul className="menu menu-horizontal gap-4 font-semibold text-[15px]">
 
             <li>
                 
@@ -59,7 +55,7 @@ export function Header() {
         </div>
 
         {/* Ações */}
-        <div className="header-actions navbar-end">
+        <div className="navbar-end gap-2">
 
         <div className="relative">
 
@@ -71,7 +67,7 @@ export function Header() {
                 }
                 setShowSearch((prev) => !prev);
                 }}
-                className="header-search-button btn btn-ghost"
+                className="btn btn-ghost rounded-full text-white transition-all hover:bg-white/20"
             >
                 <Search size={20}/>
             </button>
@@ -86,7 +82,7 @@ export function Header() {
             href="https://admin.sisvetor.sds.unb.br/"
             target="_blank"
             rel="noopener noreferrer"
-            className="header-login-button btn"
+            className="btn rounded-full border-none bg-white px-6 text-sky-900 shadow-md transition-all duration-300 hover:scale-105 hover:bg-slate-100"
             >
             <LogIn size={18} />
             Entrar
@@ -96,11 +92,14 @@ export function Header() {
 
       </div>
 
-        <div className={`header-search ${showSearch ? "header-search-open" : ""}`}>
+        <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+            showSearch ? "max-h-40" : "max-h-0"
+        }`}
+        >
+            <div className="border-t border-white/10 bg-white shadow-md">
 
-            <div className="header-search-container">
-
-                <div className="header-search-content">
+                <div className="mx-auto max-w-7xl px-6 py-4">
 
                     <input
                         autoFocus
@@ -108,7 +107,7 @@ export function Header() {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="Buscar notícias..."
-                        className="header-search-input"
+                        className="w-full rounded-full px-5 py-3 text-slate-700"
                     />
 
                 </div>

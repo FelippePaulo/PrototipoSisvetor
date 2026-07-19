@@ -64,16 +64,17 @@ export function NoticiasDestaque() {
                                 {noticia.descricao}
                             </p>
 
-                            <div className="mt-5 flex flex-wrap gap-2 ">
-                                <span className="badge badge-primary w-fit border-cyan-300 bg-cyan-50 text-cyan-800 shadow-lg">
-                                {noticia.categoriaVetor}
-                            </span>
+                            <div className="mt-4 flex flex-wrap gap-2">
+
+                                <span className="badge badge-sm border-cyan-300 bg-cyan-50 text-cyan-800">
+                                    {noticia.categoriaVetor}
+                                </span>
 
                                 {noticia.tags.map((tag) => (
 
                                     <span
                                         key={tag.id}
-                                        className="badge badge-outline"
+                                        className="badge badge-sm badge-outline"
                                     >
                                         {tag.tag}
                                     </span>

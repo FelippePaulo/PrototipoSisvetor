@@ -10,7 +10,7 @@ export function CategoryCard({
     onClick,
 }: CategoryCardProps) {
     return (
-        <button
+        <button 
             type="button"
             onClick={onClick}
             className={`

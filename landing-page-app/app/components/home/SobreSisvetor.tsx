@@ -52,7 +52,7 @@ export function SobreSisvetor() {
 
             <a
               href="https://admin.sisvetor.sds.unb.br/"
-              className="btn btn-outline rounded-full border-cyan-300 bg-cyan-50 text-cyan-800 shadow-lg"
+              className="btn btn-outline rounded-full px-8 transition-colors duration-300 hover:bg-cyan-50 hover:border-cyan-300"
             >
              Acessar Sisvetor
               <ArrowRight size={18} />

@@ -37,7 +37,7 @@ export function HeroBanner() {
 
             <a
                 href="#sobre-sisvetor"
-                className="btn btn-outline rounded-full px-8 transition-colors duration-300 hover:bg-cyan-50"
+                className="btn btn-outline rounded-full px-8 transition-colors duration-300 hover:bg-cyan-50 hover:border-cyan-300 "
             >
                 Conhecer o SisVetor
                 <ArrowRight size={18} />

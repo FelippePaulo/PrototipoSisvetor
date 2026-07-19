@@ -18,7 +18,7 @@ export function CategoryCard({
                 rounded-2xl
                 border
                 px-8
-                py-4
+                py-2
                 text-lg
                 font-semibold
                 transition-all

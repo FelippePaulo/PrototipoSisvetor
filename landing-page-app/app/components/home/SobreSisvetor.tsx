@@ -10,7 +10,7 @@ export function SobreSisvetor() {
   return (
     <section
       id="sobre-sisvetor"
-      className="bg-gradient-to-b from-white to-sky-50 py-24"
+      className="bg-gradient-to-b from-white to-sky-50 py-10"
     >
       <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-2">
 

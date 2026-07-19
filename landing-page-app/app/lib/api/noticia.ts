@@ -5,9 +5,9 @@
  * permitindo a navegação e o filtro por vetor ou agravo de interesse.
  */
 export enum CategoriaVetor {
-    TODOS = "TODOS",
-    DENGUE = "DENGUE",
-    CHAGAS = "CHAGAS",
+    TODOS = "Todos",
+    DENGUE = "Dengue",
+    CHAGAS = "Chagas",
 }
 
 /**
@@ -19,7 +19,6 @@ export enum CategoriaVetor {
 export enum TipoNoticia {
     INFORMATIVO = "INFORMATIVO",
     EVENTO = "EVENTO",
-    CAPACITACAO = "CAPACITACAO",
 }
 
 /**
@@ -31,7 +30,7 @@ export enum TipoNoticia {
 export enum TipoArquivo {
     IMAGEM = "IMAGEM",
     VIDEO = "VIDEO",
-    DOCUMENTO = "DOCUMENTO",
+    DOCUMENTO = "DOCUMENTO"
 }
 
 /**

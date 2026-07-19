@@ -3,7 +3,8 @@ import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
 import { HeroBanner } from "../components/home/HeroBanner";
 import { SobreSisvetor } from "~/components/home/SobreSisvetor";
-import { CategorySelector } from "~/components/home/HomeCategorySelector";
+import { ProgramaVigilanciaSeletor } from "~/components/home/HomeSeletorVetor";
+import { NoticiasDestaque } from "~/components/home/NoticiasCarrossel";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -18,7 +19,8 @@ export default function Home() {
       <Header />
       <HeroBanner/>
       <SobreSisvetor/>
-      <CategorySelector/>
+      <ProgramaVigilanciaSeletor/>
+      <NoticiasDestaque/>
       <Footer />
     </>
   );

@@ -1,27 +1,23 @@
 import { useState } from "react";
 import { CategoryCard } from "../utils/CategoryCard";
 
-export function CategorySelector() {
-    const [categoria, setCategoria] = useState("GERAL");
+export function ProgramaVigilanciaSeletor() {
+    const [categoria, setCategoria] = useState("TODOS");
 
     return (
-        <section className="bg-slate-50 py-20">
+        <section id="select-programa-vigilancia" className="bg-slate-50 py-10">
 
-            <div id="select-categoria" className="mx-auto max-w-7xl px-6">
+            <div  className="mx-auto max-w-7xl px-6">
 
-                <div className="mb-12 text-center">
+                <div className="mb-8 text-center">
 
-                    <span className="badge badge-info badge-outline">
+                    <h2 className="text-3xl font-bold text-slate-900">
                         Programas de Vigilância
-                    </span>
-
-                    <h2 className="mt-4 text-4xl font-bold text-slate-900">
-                        Explore os conteúdos por programa
                     </h2>
 
-                    <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-600">
-                        Selecione um programa para visualizar notícias,
-                        capacitações e eventos relacionados.
+                    <p className="mx-auto mt-2 max-w-2xl text-base text-slate-600">
+                        Selecione um programa para filtrar notícias,
+                        eventos e documentos relacionados.
                     </p>
 
                 </div>

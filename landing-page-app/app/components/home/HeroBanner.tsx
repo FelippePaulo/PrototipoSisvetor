@@ -16,7 +16,7 @@ export function HeroBanner() {
     <div className="relative z-10 mx-auto flex min-h-[650px] max-w-5xl flex-col items-center justify-center px-6 text-center">
 
         <h1 className="mt-4 text-5xl font-extrabold leading-tight text-slate-900">
-        Bem-vindo ao portal de notícias do SisVetor
+        Bem-vindo ao portal do SisVetor
         </h1>
 
         
@@ -28,19 +28,15 @@ export function HeroBanner() {
         <div className="mt-10 flex items-center justify-center gap-4">
 
              <a
-                href="#select-categoria"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary rounded-full px-8 transition-colors duration-300 hover:bg-cyan-500"
+                href="#select-programa-vigilancia"
+                className="btn btn-primary rounded-full px-8"
             >
                 Explorar notícias
                 <ArrowRight size={18} />
             </a>
 
             <a
-                 href="#sobre-sisvetor"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#sobre-sisvetor"
                 className="btn btn-outline rounded-full px-8 transition-colors duration-300 hover:bg-cyan-50"
             >
                 Conhecer o SisVetor

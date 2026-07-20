@@ -15,7 +15,7 @@ export function HeroBanner() {
 
     <div className="relative z-10 mx-auto flex min-h-[650px] max-w-5xl flex-col items-center justify-center px-6 text-center">
 
-        <h1 className="mt-4 text-5xl font-extrabold leading-tight text-slate-900">
+        <h1 className="mt-2 text-5xl font-extrabold leading-tight text-slate-900">
         Bem-vindo ao portal do SisVetor
         </h1>
 

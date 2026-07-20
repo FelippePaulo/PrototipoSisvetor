@@ -5,7 +5,7 @@ export function ProgramaVigilanciaSeletor() {
     const [categoria, setCategoria] = useState("TODOS");
 
     return (
-        <section id="select-programa-vigilancia" className="bg-slate-50 py-10">
+        <section id="select-programa-vigilancia" className="bg-slate-50 py-5">
 
             <div  className="mx-auto max-w-7xl px-6">
 

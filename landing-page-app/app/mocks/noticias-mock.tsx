@@ -1,9 +1,6 @@
-import {
-    CategoriaVetor,
-    TipoArquivo,
-    TipoNoticia,
-    type Noticia,
-} from "~/lib/api/noticia";
+import { CategoriaVetor, TipoArquivo, TipoConteudo } from "~/lib/api/enum";
+import type { Noticia } from "~/lib/api/noticia";
+
 
 export const noticiasMock: Noticia[] = [
         {
@@ -14,7 +11,7 @@ export const noticiasMock: Noticia[] = [
             "A nova versão do Portal SisVetor centraliza informações institucionais, documentos, eventos, capacitações e notícias relacionadas à vigilância epidemiológica.",
         ativa: true,
         categoriaVetor: CategoriaVetor.TODOS,
-        tipoNoticia: TipoNoticia.INFORMATIVO,
+        tipoConteudo: TipoConteudo.INFORMATIVO,
         destaque: true,
 
         tags: [
@@ -68,7 +65,7 @@ As melhorias incluem evolução dos painéis estratégicos, gestão de territór
             "Novas funcionalidades permitem maior integração entre planejamento, execução das atividades de campo e acompanhamento por meio de dashboards estratégicos.",
         ativa: true,
         categoriaVetor: CategoriaVetor.DENGUE,
-        tipoNoticia: TipoNoticia.INFORMATIVO,
+        tipoConteudo: TipoConteudo.INFORMATIVO,
         destaque: true,
 
         tags: [
@@ -111,8 +108,8 @@ As melhorias incluem evolução dos painéis estratégicos, gestão de territór
             },
         ],
 
-        createdAt: "2026-07-18T09:30:00",
-        updatedAt: "2026-07-18T09:30:00",
+        createdAt: "2026-07-16T09:30:00",
+        updatedAt: "2026-07-16T09:30:00",
     },
 
     {
@@ -123,7 +120,7 @@ As melhorias incluem evolução dos painéis estratégicos, gestão de territór
             "Municípios iniciam a utilização do novo módulo da plataforma para apoio às equipes de campo.",
         ativa: true,
         categoriaVetor: CategoriaVetor.CHAGAS,
-        tipoNoticia: TipoNoticia.INFORMATIVO,
+        tipoConteudo: TipoConteudo.INFORMATIVO,
         destaque: true,
 
         tags: [

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { noticiasMock } from "~/mocks/noticias-mock";
@@ -10,6 +10,16 @@ export function NoticiasDestaque() {
     );
 
     const [indiceAtual, setIndiceAtual] = useState(0);
+
+    useEffect(() => {
+        if (noticias.length <= 1) return;
+
+        const timeout = setTimeout(() => {
+            setIndiceAtual((indice) => (indice + 1) % noticias.length);
+        }, 2000);
+
+        return () => clearTimeout(timeout);
+    }, [indiceAtual, noticias.length]);
 
     const noticia = noticias[indiceAtual];
 
@@ -28,9 +38,17 @@ export function NoticiasDestaque() {
     }
 
     return (
-        <section className="bg-slate-50 pb-4">
-
+        <section className="bg-slate-50 py-5">
+            
             <div className="mx-auto max-w-7xl px-6">
+
+                {/*
+                <div className="pb-2">
+                    <span className="badge badge-info badge-outline w-fit pd-">
+                        Notícias em destaque
+                    </span>
+                </div>
+                */}
 
                 <div className="overflow-hidden rounded-3xl bg-white shadow-xl">
 

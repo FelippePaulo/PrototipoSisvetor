@@ -5,6 +5,7 @@ import { HeroBanner } from "../components/home/HeroBanner";
 import { SobreSisvetor } from "~/components/home/SobreSisvetor";
 import { ProgramaVigilanciaSeletor } from "~/components/home/HomeSeletorVetor";
 import { NoticiasDestaque } from "~/components/home/NoticiasCarrossel";
+import { Atualizacoes } from "~/components/home/Atualizacoes";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -21,6 +22,7 @@ export default function Home() {
       <SobreSisvetor/>
       <ProgramaVigilanciaSeletor/>
       <NoticiasDestaque/>
+      <Atualizacoes/>
       <Footer />
     </>
   );

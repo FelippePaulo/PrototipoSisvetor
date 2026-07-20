@@ -45,12 +45,12 @@ export default function NoticiaDetalhes() {
         <>
             <Header />
             {carregando ? (
-                <div className="min-h-screen flex justify-center items-center">
-                    <span className="spinner-like block"></span>
+                <div className="min-h-screen flex justify-center items-center h-64">
+                    <span className="loading loading-spinner loading-lg"></span>
                 </div>
             ) : erro || !noticia ? (
                 <div className="min-h-screen flex justify-center items-center">
-                    <div className="alert-error-like max-w-md">
+                    <div className="alert alert-error max-w-md">
                         <span>Notícia não encontrada</span>
                     </div>
                 </div>

@@ -21,7 +21,7 @@ export function HeroBanner() {
 
         
     <h2 className="mx-auto mt-4 max-w-3xl text-2xl text-slate-700">
-        Aqui você encontra informação e conteúdo atualizado sobre ações de vigilância epidemiológica
+        Aqui você encontra informações atualizadas sobre ações de vigilância epidemiológica
         realizadas em todo território nacional.
         </h2>
 

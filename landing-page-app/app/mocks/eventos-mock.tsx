@@ -1,36 +1,48 @@
 import { CategoriaVetor, ModalidadeEvento, TipoArquivo } from "~/lib/api/enum";
 import type { Evento } from "~/lib/api/evento";
 
-
 export const eventosMock: Evento[] = [
     {
         id: 1,
-        nome: "workshop-sisvetor-dengue",
 
-        titulo: "Workshop Nacional do SisVetor para Vigilância da Dengue",
+        caminhoURL: "workshop-nacional-sisvetor",
+
+        nome: "Workshop Nacional SisVetor",
 
         descricao:
-            "Encontro voltado à apresentação das funcionalidades do SisVetor e ao compartilhamento de experiências entre gestores e equipes de vigilância.",
+            "Evento voltado à apresentação das funcionalidades do SisVetor e ao compartilhamento de experiências entre gestores e equipes de vigilância.",
+
+        publicoAlvo:
+            "Gestores estaduais, municipais e profissionais da vigilância epidemiológica.",
 
         ativa: true,
 
         destaque: true,
 
+        imagemDestaque: {
+            id: 1,
+            nome: "workshop-sisvetor.jpg",
+            tipoArquivo: TipoArquivo.IMAGEM,
+            caminho: "https://placehold.co/900x600",
+            tamanho: 245831,
+        },
+
         categoriaVetor: CategoriaVetor.DENGUE,
 
-        dataInicio: "2026-08-20T09:00:00",
+        dataInicio: "2026-08-20",
 
-        dataFim: "2026-08-20T17:00:00",
+        dataFim: "2026-08-20",
+
+        horaInicio: "09:00",
+
+        horaFim: "17:00",
 
         modalidade: ModalidadeEvento.PRESENCIAL,
 
         local: "Brasília - DF",
 
-        publicoAlvo:
-            "Gestores estaduais, municipais e profissionais da vigilância.",
-
-        urlInscricao:
-            "https://sisvetor.sds.unb.br/eventos/workshop-dengue",
+        linkInscricao:
+            "https://sisvetor.sds.unb.br/eventos/workshop",
 
         tags: [
             {
@@ -43,57 +55,48 @@ export const eventosMock: Evento[] = [
             },
         ],
 
-        conteudos: [
-            {
-                id: 1,
-                titulo: "Banner",
+        createdAt: "2026-07-18T09:00:00",
 
-                descricao: "",
-
-                conteudo: "",
-
-                arquivos: [
-                    {
-                        id: 1,
-                        arquivo: {
-                            id: 1,
-                            nome: "Banner",
-
-                            tipoArquivo: TipoArquivo.IMAGEM,
-
-                            caminho: "https://placehold.co/900x600",
-
-                            tamanho: 0,
-                        },
-                    },
-                ],
-            },
-        ],
-
-        createdAt: "2026-07-18",
+        updatedAt: "2026-07-18T09:00:00",
     },
 
     {
         id: 2,
-        nome: "webinar-chagas",
 
-        titulo: "Webinar sobre Vigilância da Doença de Chagas",
+        caminhoURL: "webinar-doenca-chagas",
+
+        nome: "Webinar - Vigilância da Doença de Chagas",
 
         descricao:
-            "Apresentação de estratégias para utilização do SisVetor no apoio às ações de vigilância da Doença de Chagas.",
+            "Apresentação das novas funcionalidades do SisVetor para apoio às ações de vigilância da Doença de Chagas.",
+
+        publicoAlvo:
+            "Profissionais das equipes estaduais e municipais.",
 
         ativa: true,
 
         destaque: false,
 
+        imagemDestaque: {
+            id: 2,
+            nome: "webinar-chagas.jpg",
+            tipoArquivo: TipoArquivo.IMAGEM,
+            caminho: "https://placehold.co/900x600",
+            tamanho: 218532,
+        },
+
         categoriaVetor: CategoriaVetor.CHAGAS,
 
-        dataInicio: "2026-09-12T14:00:00",
+        dataInicio: "2026-09-12",
+
+        horaInicio: "14:00",
+
+        horaFim: "16:00",
 
         modalidade: ModalidadeEvento.ONLINE,
 
-        publicoAlvo:
-            "Profissionais das equipes estaduais e municipais.",
+        linkEvento:
+            "https://meet.google.com/abc-defg-hij",
 
         linkInscricao:
             "https://sisvetor.sds.unb.br/eventos/webinar-chagas",
@@ -109,61 +112,52 @@ export const eventosMock: Evento[] = [
             },
         ],
 
-        conteudos: [
-            {
-                id: 2,
-                titulo: "Banner",
+        createdAt: "2026-07-15T10:30:00",
 
-                descricao: "",
-
-                conteudo: "",
-
-                arquivos: [
-                    {
-                        id: 2,
-                        arquivo: {
-                            id: 2,
-                            nome: "Banner",
-
-                            tipoArquivo: TipoArquivo.IMAGEM,
-
-                            caminho: "https://placehold.co/900x600",
-
-                            tamanho: 0,
-                        },
-                    },
-                ],
-            },
-        ],
-
-        createdAt: "2026-07-15",
+        updatedAt: "2026-07-15T10:30:00",
     },
 
     {
         id: 3,
-        nome: "oficina-planejamento",
 
-        titulo: "Oficina de Planejamento das Ações de Campo",
+        caminhoURL: "oficina-planejamento-campo",
+
+        nome: "Oficina de Planejamento das Ações de Campo",
 
         descricao:
-            "Capacitação para utilização dos recursos de planejamento, execução e monitoramento das atividades de campo.",
+            "Capacitação prática sobre planejamento, execução e monitoramento das atividades de campo utilizando o SisVetor.",
+
+        publicoAlvo:
+            "Coordenadores municipais, supervisores e técnicos de campo.",
 
         ativa: true,
 
         destaque: false,
 
+        imagemDestaque: {
+            id: 3,
+            nome: "oficina-planejamento.jpg",
+            tipoArquivo: TipoArquivo.IMAGEM,
+            caminho: "https://placehold.co/900x600",
+            tamanho: 231874,
+        },
+
         categoriaVetor: CategoriaVetor.DENGUE,
 
-        dataInicio: "2026-10-01T08:30:00",
+        dataInicio: "2026-10-01",
 
-        dataFim: "2026-10-02T17:00:00",
+        dataFim: "2026-10-02",
+
+        horaInicio: "08:30",
+
+        horaFim: "17:00",
 
         modalidade: ModalidadeEvento.HIBRIDO,
 
         local: "Rio de Janeiro - RJ",
 
-        publicoAlvo:
-            "Coordenadores municipais e supervisores de campo.",
+        linkEvento:
+            "https://meet.google.com/xyz-abcd-123",
 
         linkInscricao:
             "https://sisvetor.sds.unb.br/eventos/oficina-planejamento",
@@ -179,33 +173,8 @@ export const eventosMock: Evento[] = [
             },
         ],
 
-        conteudos: [
-            {
-                id: 3,
-                titulo: "Banner",
+        createdAt: "2026-07-10T15:45:00",
 
-                descricao: "",
-
-                conteudo: "",
-
-                arquivos: [
-                    {
-                        id: 3,
-                        arquivo: {
-                            id: 3,
-                            nome: "Banner",
-
-                            tipoArquivo: TipoArquivo.IMAGEM,
-
-                            caminho: "https://placehold.co/900x600",
-
-                            tamanho: 0,
-                        },
-                    },
-                ],
-            },
-        ],
-
-        createdAt: "2026-07-10",
+        updatedAt: "2026-07-10T15:45:00",
     },
 ];

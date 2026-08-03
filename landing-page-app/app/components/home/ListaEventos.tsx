@@ -49,7 +49,7 @@ export function ListaEventos() {
                         </span>
 
                         <span className="mt-1 font-semibold text-slate-800 transition-colors hover:text-emerald-700">
-                            {evento.titulo}
+                            {evento.nome}
                         </span>
 
                         <span className="mt-2 text-sm text-slate-500">
@@ -91,7 +91,7 @@ export function ListaEventos() {
 
                 <a
                     href="/eventos"
-                    className="inline-flex items-center gap-2 font-medium text-emerald-700 transition-colors hover:text-emerald-900"
+                    className="inline-flex items-center gap-2 font-medium text-sky-700 transition-colors hover:text-sky-900"
                 >
 
                     Ver todos

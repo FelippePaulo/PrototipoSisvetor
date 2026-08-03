@@ -1,3 +1,4 @@
+import { ListaDocumentos } from "./ListaDocumentos";
 import { ListaEventos } from "./ListaEventos";
 import { ListaNoticias } from "./ListaNoticias";
 
@@ -28,11 +29,13 @@ export function Atualizacoes() {
 
                     {/* Painéis */}
 
-                    <div className="grid gap-8 lg:grid-cols-2">
+                    <div className="grid gap-8 lg:grid-cols-3">
 
                         <ListaNoticias />
 
                         <ListaEventos />
+
+                        <ListaDocumentos/>
 
                     </div>
 

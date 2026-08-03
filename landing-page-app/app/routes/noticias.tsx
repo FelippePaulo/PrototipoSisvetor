@@ -1,3 +1,4 @@
+{/*
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { getNoticiasAtivas } from '../lib/api/noticiaController';
@@ -55,7 +56,7 @@ export default function Noticias() {
                     </div>
                 ) : (
                     <>
-                        {/* Lista de Notícias */}
+                        //Lista de Notícias 
                         <div className="grid gap-6">
                             {noticias.length > 0 ? (
                                 noticias.map((noticia) => (
@@ -92,7 +93,7 @@ export default function Noticias() {
                             )}
                         </div>
 
-                        {/* Paginação */}
+                       //Paginação 
                         {paginacao.total > 0 && (
                             <div className="join mt-8">
                                 {Array.from({ length: Math.ceil(paginacao.total / paginacao.size) }, (_, i) => i).map((pageNum) => (
@@ -112,4 +113,4 @@ export default function Noticias() {
             <Footer />
         </>
     );
-}
+*/}

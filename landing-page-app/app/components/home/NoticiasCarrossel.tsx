@@ -23,9 +23,7 @@ export function NoticiasDestaque() {
 
     const noticia = noticias[indiceAtual];
 
-    const imagemPrincipal =
-        noticia.conteudos[0]?.arquivos[0]?.arquivo.caminho ??
-        "https://placehold.co/900x600";
+    
 
     function noticiaAnterior() {
         setIndiceAtual((indice) =>
@@ -59,7 +57,7 @@ export function NoticiasDestaque() {
                         <div className="h-full overflow-hidden">
 
                             <img
-                                src={imagemPrincipal}
+                                src={noticia.imagemDestaque.caminho}
                                 alt={noticia.titulo}
                                 className="h-full w-full object-cover object-center"
                             />
@@ -79,7 +77,7 @@ export function NoticiasDestaque() {
                             </h3>
 
                             <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-600">
-                                {noticia.descricao}
+                                {noticia.resumo}
                             </p>
 
                             <div className="mt-4 flex flex-wrap gap-2">

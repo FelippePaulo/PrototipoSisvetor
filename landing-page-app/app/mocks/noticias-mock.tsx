@@ -33,11 +33,7 @@ export const noticiasMock: Noticia[] = [
             {
                 id: 1,
                 tag: "Vigilância",
-            },
-            {
-                id: 2,
-                tag: "Tecnologia",
-            },
+            }  
         ],
 
         conteudo: [
@@ -119,11 +115,7 @@ export const noticiasMock: Noticia[] = [
             {
                 id: 3,
                 tag: "Dashboards",
-            },
-            {
-                id: 4,
-                tag: "Tecnologia",
-            },
+            }   
         ],
 
         conteudo: [
@@ -204,11 +196,7 @@ export const noticiasMock: Noticia[] = [
             {
                 id: 5,
                 tag: "Capacitação",
-            },
-            {
-                id: 6,
-                tag: "Chagas",
-            },
+            } 
         ],
 
         conteudo: [

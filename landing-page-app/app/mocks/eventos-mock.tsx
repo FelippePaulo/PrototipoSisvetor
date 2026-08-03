@@ -48,11 +48,7 @@ export const eventosMock: Evento[] = [
             {
                 id: 1,
                 tag: "Workshop",
-            },
-            {
-                id: 2,
-                tag: "SisVetor",
-            },
+            } 
         ],
 
         createdAt: "2026-07-18T09:00:00",
@@ -105,11 +101,7 @@ export const eventosMock: Evento[] = [
             {
                 id: 3,
                 tag: "Webinar",
-            },
-            {
-                id: 4,
-                tag: "Chagas",
-            },
+            } 
         ],
 
         createdAt: "2026-07-15T10:30:00",
@@ -166,11 +158,7 @@ export const eventosMock: Evento[] = [
             {
                 id: 5,
                 tag: "Oficina",
-            },
-            {
-                id: 6,
-                tag: "Planejamento",
-            },
+            }    
         ],
 
         createdAt: "2026-07-10T15:45:00",

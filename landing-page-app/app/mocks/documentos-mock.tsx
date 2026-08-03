@@ -30,11 +30,7 @@ export const documentosMock: Documento[] = [
             {
                 id: 1,
                 tag: "Manual",
-            },
-            {
-                id: 2,
-                tag: "SisVetor",
-            },
+            }
         ],
 
         createdAt: "2026-07-20T10:00:00",
@@ -70,11 +66,7 @@ export const documentosMock: Documento[] = [
             {
                 id: 3,
                 tag: "Nota Técnica",
-            },
-            {
-                id: 4,
-                tag: "Dengue",
-            },
+            }
         ],
 
         createdAt: "2026-07-18T14:20:00",
@@ -110,11 +102,7 @@ export const documentosMock: Documento[] = [
             {
                 id: 5,
                 tag: "Protocolo",
-            },
-            {
-                id: 6,
-                tag: "Chagas",
-            },
+            }
         ],
 
         createdAt: "2026-07-15T09:45:00",

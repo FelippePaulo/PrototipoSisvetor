@@ -41,20 +41,19 @@ export function SobreSisvetor() {
 
           <div className="mt-10 flex gap-4">
 
+            <a
+              href="https://admin.sisvetor.sds.unb.br/"
+              className="btn btn-outline rounded-full px-8 transition-colors duration-300 hover:bg-cyan-50 hover:border-cyan-300"
+            >
+             Acessar Sisvetor
+              <ArrowRight size={18} />
+            </a>
 
             <a
               href="https://wiki.sisvetor.sds.unb.br/"
               className="btn btn-primary rounded-full "
             >
              Explorar Funcionalidades
-              <ArrowRight size={18} />
-            </a>
-
-            <a
-              href="https://admin.sisvetor.sds.unb.br/"
-              className="btn btn-outline rounded-full px-8 transition-colors duration-300 hover:bg-cyan-50 hover:border-cyan-300"
-            >
-             Acessar Sisvetor
               <ArrowRight size={18} />
             </a>
 

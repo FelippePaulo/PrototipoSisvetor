@@ -26,6 +26,13 @@ export function HeroBanner() {
         </h2>
 
         <div className="mt-10 flex items-center justify-center gap-4">
+            <a
+                href="#sobre-sisvetor"
+                className="btn btn-outline rounded-full px-8 transition-colors duration-300 hover:bg-cyan-50 hover:border-cyan-300 "
+            >
+                Conhecer o SisVetor
+                <ArrowRight size={18} />
+            </a>
 
              <a
                 href="#select-programa-vigilancia"
@@ -35,13 +42,7 @@ export function HeroBanner() {
                 <ArrowRight size={18} />
             </a>
 
-            <a
-                href="#sobre-sisvetor"
-                className="btn btn-outline rounded-full px-8 transition-colors duration-300 hover:bg-cyan-50 hover:border-cyan-300 "
-            >
-                Conhecer o SisVetor
-                <ArrowRight size={18} />
-            </a>
+           
 
         </div>
 

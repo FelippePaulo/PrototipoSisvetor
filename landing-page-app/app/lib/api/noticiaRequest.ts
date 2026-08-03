@@ -1,3 +1,5 @@
+import type { NoticiaPage } from './noticia';
+
 export class NoticiaRequester {
     private baseUrl: string;
 
@@ -5,8 +7,9 @@ export class NoticiaRequester {
         this.baseUrl = baseUrl;
     }
 
-    async fetchNoticiasAtivas() {
-        const response = await fetch(`${this.baseUrl}/ativo`, {
+    async fetchNoticiasAtivas(page: number = 0, size: number = 12): Promise<NoticiaPage> {
+        const url = `${this.baseUrl}/ativo?page=${page}&size=${size}&sort=id,desc`;
+        const response = await fetch(url, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

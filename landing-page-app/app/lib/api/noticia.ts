@@ -1,39 +1,4 @@
 /**
- * Categoria temática da notícia.
- *
- * Utilizada para classificar e organizar as notícias do portal,
- * permitindo a navegação e o filtro por vetor ou agravo de interesse.
- */
-export enum CategoriaVetor {
-    TODOS = "Todos",
-    DENGUE = "Dengue",
-    CHAGAS = "Chagas",
-}
-
-/**
- * Classificação editorial da notícia.
- *
- * Define a natureza do conteúdo publicado, permitindo
- * diferenciar notícias informativas, eventos e capacitações.
- */
-export enum TipoNoticia {
-    INFORMATIVO = "INFORMATIVO",
-    EVENTO = "EVENTO",
-}
-
-/**
- * Tipo do arquivo associado ao conteúdo da notícia.
- *
- * Define o formato do recurso utilizado na apresentação
- * do conteúdo, como imagem, vídeo ou documento.
- */
-export enum TipoArquivo {
-    IMAGEM = "IMAGEM",
-    VIDEO = "VIDEO",
-    DOCUMENTO = "DOCUMENTO"
-}
-
-/**
  * Tag utilizada para classificar e facilitar a pesquisa
  * de notícias relacionadas.
  */
@@ -42,33 +7,41 @@ export interface NoticiaTag {
     tag: string;
 }
 
+/**
+ * Modelo de arquivo (reflete ArquivoSemProprietarioDtoOutput do backend).
+ */
 export interface Arquivo {
     id: number;
     nome: string;
-    tipoArquivo: TipoArquivo;
-    caminho: string;
-    tamanho: number;
+    descricao?: string;
+    url: string;
+    tipoArquivo: string;
+    nomeArquivo: string;
 }
 
+/**
+ * Relação entre conteúdo e arquivo.
+ */
 export interface NoticiaArquivo {
     id: number;
     arquivo: Arquivo;
 }
 
+/**
+ * Conteúdo de uma seção da notícia (reflete NoticiaConteudoDtoOutput do backend).
+ */
 export interface NoticiaConteudo {
     id: number;
-    titulo: string;
+    nome: string;
     descricao: string;
     conteudo: string;
+    ordem: number;
     arquivos: NoticiaArquivo[];
 }
 
 /**
  * Representa uma notícia publicada no Portal SisVetor.
- *
- * A notícia possui informações editoriais, categoria temática,
- * tipo de publicação, conteúdo organizado em seções e arquivos
- * associados para apresentação no portal.
+ * Alinhada com NoticiaDtoOutput do backend.
  */
 export interface Noticia {
     id: number;
@@ -76,13 +49,23 @@ export interface Noticia {
     titulo: string;
     descricao: string;
     ativa: boolean;
-    categoriaVetor: CategoriaVetor;
-    tipoNoticia: TipoNoticia;
-    destaque: boolean;
     tags: NoticiaTag[];
     conteudos: NoticiaConteudo[];
-    createdAt?: string;
-    updatedAt?: string;
+}
+
+/**
+ * Página paginada de notícias (reflete Page<NoticiaDtoOutput> do Spring).
+ */
+export interface NoticiaPage {
+    content: Noticia[];
+    totalElements: number;
+    totalPages: number;
+    number: number;
+    size: number;
+    numberOfElements: number;
+    first: boolean;
+    last: boolean;
+    empty: boolean;
 }
 
 

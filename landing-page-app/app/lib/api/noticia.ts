@@ -47,5 +47,18 @@ export interface BlocoConteudoNoticia {
     arquivos: Arquivo[];
 }
 
-
+/**
+ * Resposta paginada do Spring (GET /api/v1/noticias/ativo).
+ */
+export interface NoticiaPage {
+    content: Noticia[];
+    totalElements: number;
+    totalPages: number;
+    number: number;
+    size: number;
+    numberOfElements: number;
+    first: boolean;
+    last: boolean;
+    empty: boolean;
+}
 

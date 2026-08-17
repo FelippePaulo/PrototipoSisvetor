@@ -53,3 +53,68 @@ html {
   --noise: 0;
 }
 
+/* Conteúdo HTML das notícias (vem do editor rich-text do admin). Não usamos @tailwindcss/typography
+   aqui — o pacote não está instalado no projeto — então esses estilos assumem o papel do "prose". */
+.conteudo-noticia {
+  color: var(--color-slate-600, #475569);
+  line-height: 1.75;
+}
+
+.conteudo-noticia > * + * {
+  margin-top: 1em;
+}
+
+.conteudo-noticia h1,
+.conteudo-noticia h2,
+.conteudo-noticia h3 {
+  font-weight: 700;
+  color: var(--color-slate-900, #0f172a);
+  line-height: 1.3;
+}
+
+.conteudo-noticia h1 {
+  font-size: 1.5em;
+}
+
+.conteudo-noticia h2 {
+  font-size: 1.3em;
+}
+
+.conteudo-noticia h3 {
+  font-size: 1.1em;
+}
+
+.conteudo-noticia a {
+  color: var(--color-sky-700, #0369a1);
+  text-decoration: underline;
+}
+
+.conteudo-noticia a:hover {
+  color: var(--color-sky-900, #0c4a6e);
+}
+
+.conteudo-noticia ul,
+.conteudo-noticia ol {
+  padding-left: 1.5em;
+}
+
+.conteudo-noticia ul {
+  list-style: disc;
+}
+
+.conteudo-noticia ol {
+  list-style: decimal;
+}
+
+.conteudo-noticia blockquote {
+  border-left: 3px solid var(--color-cyan-300, #67e8f9);
+  padding-left: 1em;
+  font-style: italic;
+  color: var(--color-slate-500, #64748b);
+}
+
+.conteudo-noticia img {
+  border-radius: 1rem;
+  max-width: 100%;
+}
+

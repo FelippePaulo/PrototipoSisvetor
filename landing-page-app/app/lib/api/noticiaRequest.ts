@@ -5,8 +5,8 @@ export class NoticiaRequester {
         this.baseUrl = baseUrl;
     }
 
-    async fetchNoticiasAtivas() {
-        const response = await fetch(`${this.baseUrl}/ativo`, {
+    async fetchNoticiasAtivas(page: number = 0, size: number = 20) {
+        const response = await fetch(`${this.baseUrl}/ativo?page=${page}&size=${size}&sort=id,desc`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

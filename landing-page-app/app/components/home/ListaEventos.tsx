@@ -1,10 +1,17 @@
 import { ArrowRight, CalendarDays } from "lucide-react";
+import type { CategoriaVetor } from "~/lib/api/enum";
+import { pertenceCategoria } from "~/lib/utils";
 import { eventosMock } from "~/mocks/eventos-mock";
 
-export function ListaEventos() {
+interface ListaEventosProps {
+    categoria: CategoriaVetor;
+}
+
+export function ListaEventos({ categoria }: ListaEventosProps) {
 
     const eventos = eventosMock
         .filter((evento) => evento.ativa)
+        .filter((evento) => pertenceCategoria(evento.categoriaVetor, categoria))
         .sort(
             (a, b) =>
                 new Date(a.dataInicio).getTime() -
@@ -33,6 +40,14 @@ export function ListaEventos() {
             </div>
 
             {/* Lista */}
+
+            {eventos.length === 0 ? (
+
+                <p className="py-4 text-slate-600">
+                    Nenhum evento programado para este programa.
+                </p>
+
+            ) : (
 
             <div className="divide-y divide-slate-200">
 
@@ -84,6 +99,8 @@ export function ListaEventos() {
                 ))}
 
             </div>
+
+            )}
 
             {/* Rodapé */}
 

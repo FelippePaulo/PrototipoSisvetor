@@ -1,21 +1,21 @@
 import { ArrowRight, Newspaper } from "lucide-react";
-import { TipoConteudo } from "~/lib/api/enum";
-import { noticiasMock } from "~/mocks/noticias-mock";
+import { Link } from "react-router";
+import { TipoConteudo, type CategoriaVetor } from "~/lib/api/enum";
+import { pertenceCategoria } from "~/lib/utils";
+import { useNoticiasAtivas, ordenarPorMaisRecente } from "~/lib/hooks/useNoticiasAtivas";
 
+interface ListaNoticiasProps {
+    categoria: CategoriaVetor;
+}
 
-export function ListaNoticias() {
+export function ListaNoticias({ categoria }: ListaNoticiasProps) {
 
-    const noticias = noticiasMock
-        .filter(
-            (noticia) =>
-                noticia.ativa &&
-                noticia.tipoConteudo === TipoConteudo.INFORMATIVO
-        )
-        .sort(
-            (a, b) =>
-                new Date(b.createdAt ?? "").getTime() -
-                new Date(a.createdAt ?? "").getTime()
-        )
+    const { noticias: noticiasAtivas, carregando } = useNoticiasAtivas();
+
+    const noticias = noticiasAtivas
+        .filter((noticia) => noticia.tipoConteudo === TipoConteudo.INFORMATIVO)
+        .filter((noticia) => pertenceCategoria(noticia.categoriaVetor, categoria))
+        .sort(ordenarPorMaisRecente)
         .slice(0, 5);
 
     return (
@@ -40,31 +40,57 @@ export function ListaNoticias() {
 
             {/* Lista */}
 
-            <div className="divide-y divide-slate-200">
+            {carregando ? (
 
-                {noticias.map((noticia) => (
+                <div className="flex h-40 items-center justify-center">
+                    <span className="loading loading-spinner loading-lg text-sky-700"></span>
+                </div>
 
-                    <button
-                        key={noticia.id}
-                        type="button"
-                        className="flex w-full cursor-pointer flex-col py-4 text-left transition-colors hover:bg-slate-50"
-                    >
+            ) : noticias.length === 0 ? (
 
-                        <span className="text-sm text-slate-500">
-                            {formatarData(noticia.createdAt)}
-                        </span>
+                <p className="py-4 text-slate-600">
+                    Nenhuma notícia publicada até o momento.
+                </p>
 
-                        <span className="mt-1 font-semibold text-slate-800 transition-colors hover:text-sky-700">
-                            {noticia.titulo}
-                        </span>
+            ) : (
 
-                        <div className="mt-4 flex flex-wrap gap-2">
+                <div className="divide-y divide-slate-200">
 
-                                <span className="badge badge-sm border-cyan-300 bg-cyan-50 text-cyan-800">
-                                    {noticia.categoriaVetor}
-                                </span>
+                    {noticias.map((noticia) => (
 
-                                {noticia.tags.map((tag) => (
+                        <Link
+                            key={noticia.id}
+                            to={`/noticias/${noticia.caminhoURL}`}
+                            className="group flex w-full cursor-pointer flex-col py-4 text-left transition-colors hover:bg-slate-50"
+                        >
+
+                            <span className="text-sm text-slate-500">
+                                {formatarData(noticia.createdAt)}
+                            </span>
+
+                            <span className="mt-1 font-semibold text-slate-800 transition-colors group-hover:text-sky-700">
+                                {noticia.titulo}
+                            </span>
+
+                            {noticia.resumo && (
+
+                                <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-600">
+                                    {noticia.resumo}
+                                </p>
+
+                            )}
+
+                            <div className="mt-4 flex flex-wrap gap-2">
+
+                                {noticia.categoriaVetor && (
+
+                                    <span className="badge badge-sm border-cyan-300 bg-cyan-50 text-cyan-800">
+                                        {noticia.categoriaVetor}
+                                    </span>
+
+                                )}
+
+                                {noticia.tags?.map((tag) => (
 
                                     <span
                                         key={tag.id}
@@ -77,11 +103,13 @@ export function ListaNoticias() {
 
                             </div>
 
-                    </button>
+                        </Link>
 
-                ))}
+                    ))}
 
-            </div>
+                </div>
+
+            )}
 
             {/* Rodapé */}
 

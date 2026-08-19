@@ -1,11 +1,17 @@
 import { ArrowRight, Download, FileText } from "lucide-react";
+import type { CategoriaVetor } from "~/lib/api/enum";
+import { pertenceCategoria } from "~/lib/utils";
 import { documentosMock } from "~/mocks/documentos-mock";
 
+interface ListaDocumentosProps {
+    categoria: CategoriaVetor;
+}
 
-export function ListaDocumentos() {
+export function ListaDocumentos({ categoria }: ListaDocumentosProps) {
 
     const documentos = documentosMock
         .filter((documento) => documento.ativo)
+        .filter((documento) => pertenceCategoria(documento.categoriaVetor, categoria))
         .sort(
             (a, b) =>
                 new Date(b.createdAt ?? "").getTime() -
@@ -34,6 +40,14 @@ export function ListaDocumentos() {
             </div>
 
             {/* Lista */}
+
+            {documentos.length === 0 ? (
+
+                <p className="py-4 text-slate-600">
+                    Nenhum documento disponível para este programa.
+                </p>
+
+            ) : (
 
             <div className="divide-y divide-slate-200">
 
@@ -77,6 +91,8 @@ export function ListaDocumentos() {
                 ))}
 
             </div>
+
+            )}
 
             {/* Rodapé */}
 

@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { CategoriaVetor } from "~/lib/api/enum";
 import { CategoryCard } from "../utils/CategoryCard";
 
-export function ProgramaVigilanciaSeletor() {
-    const [categoria, setCategoria] = useState("TODOS");
+interface ProgramaVigilanciaSeletorProps {
+    categoria: CategoriaVetor;
+    onCategoriaChange: (categoria: CategoriaVetor) => void;
+}
+
+export function ProgramaVigilanciaSeletor({
+    categoria,
+    onCategoriaChange,
+}: ProgramaVigilanciaSeletorProps) {
 
     return (
         <section id="select-programa-vigilancia" className="bg-slate-50 py-5">
@@ -26,24 +33,24 @@ export function ProgramaVigilanciaSeletor() {
 
                     <CategoryCard
                         titulo="Todos"
-                        ativa={categoria === "TODOS"}
-                        onClick={() => setCategoria("TODOS")}
+                        ativa={categoria === CategoriaVetor.TODOS}
+                        onClick={() => onCategoriaChange(CategoriaVetor.TODOS)}
                     />
 
                     <CategoryCard
                         titulo="Chagas"
-                        ativa={categoria === "CHAGAS"}
-                        onClick={() => setCategoria("CHAGAS")}
+                        ativa={categoria === CategoriaVetor.CHAGAS}
+                        onClick={() => onCategoriaChange(CategoriaVetor.CHAGAS)}
                     />
 
 
                     <CategoryCard
                         titulo="Dengue"
-                        ativa={categoria === "DENGUE"}
-                        onClick={() => setCategoria("DENGUE")}
+                        ativa={categoria === CategoriaVetor.DENGUE}
+                        onClick={() => onCategoriaChange(CategoriaVetor.DENGUE)}
                     />
 
-                    
+
                 </div>
 
             </div>

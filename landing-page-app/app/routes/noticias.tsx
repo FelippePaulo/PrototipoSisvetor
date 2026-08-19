@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router';
-import { ArrowLeft, ArrowRight, Newspaper } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Newspaper, X } from 'lucide-react';
 import { getNoticiasAtivas } from '../lib/api/noticiaController';
 import type { Noticia } from '../lib/api/noticia';
 import { Header } from '../components/layout/Header';
@@ -22,38 +22,62 @@ function formatarData(data?: string): string {
     });
 }
 
+const TAMANHO_PAGINA = 12;
+
 export default function Noticias() {
     const [noticias, setNoticias] = useState<Noticia[]>([]);
-    const [paginacao, setPaginacao] = useState({
-        page: 0,
-        size: 12,
-        total: 0
-    });
     const [carregando, setCarregando] = useState(false);
-
-    async function carregarNoticias(page = 0) {
-        setCarregando(true);
-        try {
-            const response = await getNoticiasAtivas(page, paginacao.size);
-            setNoticias(response.content);
-            setPaginacao({
-                page: response.number,
-                size: response.size,
-                total: response.totalElements
-            });
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setCarregando(false);
-        }
-    }
+    const [pagina, setPagina] = useState(0);
+    const [tagSelecionada, setTagSelecionada] = useState<string | null>(null);
 
     useEffect(() => {
-        carregarNoticias(0);
+        async function carregarNoticias() {
+            setCarregando(true);
+            try {
+                // Não existe endpoint público de filtragem por tag — a filtragem é feita aqui no
+                // cliente, então carrega um lote maior de uma vez (mesma limitação de escala do
+                // fetch em noticias.$slug.tsx).
+                const response = await getNoticiasAtivas(0, 100);
+                setNoticias(response.content);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setCarregando(false);
+            }
+        }
+
+        carregarNoticias();
     }, []);
 
-    const totalPaginas = Math.ceil(paginacao.total / paginacao.size);
+    const tagsDisponiveis = useMemo(() => {
+        const tags = new Set<string>();
+        noticias.forEach((noticia) => {
+            noticia.tags?.forEach((tag) => tags.add(tag.tag));
+        });
+        return Array.from(tags).sort((a, b) => a.localeCompare(b, "pt-BR"));
+    }, [noticias]);
+
+    const noticiasFiltradas = useMemo(() => {
+        if (!tagSelecionada) return noticias;
+        return noticias.filter((noticia) => noticia.tags?.some((tag) => tag.tag === tagSelecionada));
+    }, [noticias, tagSelecionada]);
+
+    const totalPaginas = Math.ceil(noticiasFiltradas.length / TAMANHO_PAGINA);
+    const noticiasDaPagina = noticiasFiltradas.slice(
+        pagina * TAMANHO_PAGINA,
+        pagina * TAMANHO_PAGINA + TAMANHO_PAGINA
+    );
+
+    function selecionarTag(tag: string | null) {
+        setTagSelecionada(tag);
+        setPagina(0);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function irParaPagina(novaPagina: number) {
+        setPagina(novaPagina);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
 
     return (
         <div className="flex min-h-screen flex-col">
@@ -77,19 +101,63 @@ export default function Noticias() {
 
                 <section className="flex flex-1 flex-col justify-center bg-slate-50 py-10">
                     <div className="mx-auto w-full max-w-7xl px-6">
+                        {tagsDisponiveis.length > 0 && (
+                            <div className="mb-8 flex flex-wrap items-center gap-2">
+                                <button
+                                    type="button"
+                                    onClick={() => selecionarTag(null)}
+                                    className={`badge badge-lg cursor-pointer border-slate-300 ${
+                                        tagSelecionada === null
+                                            ? "badge-info text-white"
+                                            : "badge-outline bg-white text-slate-600 hover:border-sky-400 hover:text-sky-700"
+                                    }`}
+                                >
+                                    Todas
+                                </button>
+                                {tagsDisponiveis.map((tag) => (
+                                    <button
+                                        key={tag}
+                                        type="button"
+                                        onClick={() => selecionarTag(tag)}
+                                        className={`badge badge-lg cursor-pointer border-slate-300 ${
+                                            tagSelecionada === tag
+                                                ? "badge-info text-white"
+                                                : "badge-outline bg-white text-slate-600 hover:border-sky-400 hover:text-sky-700"
+                                        }`}
+                                    >
+                                        {tag}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+
                         {carregando ? (
                             <div className="flex h-64 items-center justify-center">
                                 <span className="loading loading-spinner loading-lg text-sky-700"></span>
                             </div>
-                        ) : noticias.length === 0 ? (
+                        ) : noticiasFiltradas.length === 0 ? (
                             <div className="rounded-3xl border border-slate-200 bg-white p-12 text-center shadow-sm">
                                 <Newspaper className="mx-auto text-slate-400" size={40} />
-                                <p className="mt-4 text-lg text-slate-600">Nenhuma notícia encontrada.</p>
+                                <p className="mt-4 text-lg text-slate-600">
+                                    {tagSelecionada
+                                        ? `Nenhuma notícia encontrada para a tag "${tagSelecionada}".`
+                                        : "Nenhuma notícia encontrada."}
+                                </p>
+                                {tagSelecionada && (
+                                    <button
+                                        type="button"
+                                        onClick={() => selecionarTag(null)}
+                                        className="btn btn-outline btn-sm mt-4 gap-2 rounded-full"
+                                    >
+                                        <X size={14} />
+                                        Limpar filtro
+                                    </button>
+                                )}
                             </div>
                         ) : (
                             <>
                                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                                    {noticias.map((noticia) => (
+                                    {noticiasDaPagina.map((noticia) => (
                                         <Link
                                             key={noticia.id}
                                             to={`/noticias/${noticia.caminhoURL}`}
@@ -149,21 +217,21 @@ export default function Noticias() {
                                         <button
                                             type="button"
                                             className="btn btn-circle btn-outline"
-                                            disabled={paginacao.page === 0}
-                                            onClick={() => carregarNoticias(paginacao.page - 1)}
+                                            disabled={pagina === 0}
+                                            onClick={() => irParaPagina(pagina - 1)}
                                         >
                                             <ArrowLeft size={18} />
                                         </button>
 
                                         <span className="text-sm font-medium text-slate-600">
-                                            Página {paginacao.page + 1} de {totalPaginas}
+                                            Página {pagina + 1} de {totalPaginas}
                                         </span>
 
                                         <button
                                             type="button"
                                             className="btn btn-circle btn-outline"
-                                            disabled={paginacao.page + 1 >= totalPaginas}
-                                            onClick={() => carregarNoticias(paginacao.page + 1)}
+                                            disabled={pagina + 1 >= totalPaginas}
+                                            onClick={() => irParaPagina(pagina + 1)}
                                         >
                                             <ArrowRight size={18} />
                                         </button>

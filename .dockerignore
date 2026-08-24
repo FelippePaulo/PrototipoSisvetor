@@ -2,3 +2,9 @@
 build
 node_modules
 README.md
+
+# O contexto de build passou a ser a raiz do repo (o app saiu de landing-page-app/),
+# então estes precisam ser excluídos explicitamente para não irem parar na imagem.
+.git
+.gitignore
+.claude

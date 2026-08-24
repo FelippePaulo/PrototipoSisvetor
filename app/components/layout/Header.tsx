@@ -1,5 +1,6 @@
 import { LogIn, Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
 
 export function Header() {
 
@@ -34,11 +35,17 @@ export function Header() {
         <div className="navbar-start">
             <div className="flex flex-col">
 
-                    <img
-                    src="/logo_sisvetor_branco.png"
-                    alt="Logo SisVetor"
-                    className="h-16 w-28 object-contain"
-                    />
+                    <Link
+                    to="/"
+                    aria-label="Ir para a página inicial"
+                    className="rounded-lg transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    >
+                        <img
+                        src="/logo_sisvetor_branco.png"
+                        alt="Logo SisVetor"
+                        className="h-16 w-28 object-contain"
+                        />
+                    </Link>
 
             </div>
         </div>

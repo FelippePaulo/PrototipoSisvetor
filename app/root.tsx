@@ -5,10 +5,24 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteLoaderData,
 } from "react-router";
 
 import type { Route } from "./+types/root";
+import { API_URL_PADRAO } from "./lib/api/config";
 import "./app.css";
+
+/**
+ * Expõe configuração de runtime para o cliente. Roda no servidor, então lê `process.env`
+ * a cada boot — permitindo que a mesma imagem Docker atenda dev, homolog e produção.
+ */
+export function loader() {
+  return {
+    ENV: {
+      API_URL: process.env.API_URL ?? API_URL_PADRAO,
+    },
+  };
+}
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -24,6 +38,10 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  // useRouteLoaderData (em vez de useLoaderData) porque o Layout também envolve a ErrorBoundary,
+  // caso em que os dados do loader podem não existir.
+  const data = useRouteLoaderData<typeof loader>("root");
+
   return (
     <html lang="en" data-theme="synthwave">
       <head>
@@ -34,6 +52,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        {/* Precisa vir antes de <Scripts /> para que window.ENV exista quando o bundle carregar. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(data?.ENV ?? {})};`,
+          }}
+        />
         <ScrollRestoration />
         <Scripts />
       </body>

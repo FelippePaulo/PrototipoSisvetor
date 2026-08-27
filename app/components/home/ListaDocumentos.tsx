@@ -1,7 +1,8 @@
-import { ArrowRight, Download, FileText } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
+import { Link } from "react-router";
 import type { CategoriaVetor } from "~/lib/api/enum";
 import { pertenceCategoria } from "~/lib/utils";
-import { documentosMock } from "~/mocks/documentos-mock";
+import { useDocumentosAtivos } from "~/lib/hooks/useDocumentosAtivos";
 
 interface ListaDocumentosProps {
     categoria: CategoriaVetor;
@@ -9,14 +10,10 @@ interface ListaDocumentosProps {
 
 export function ListaDocumentos({ categoria }: ListaDocumentosProps) {
 
-    const documentos = documentosMock
-        .filter((documento) => documento.ativo)
+    const { documentos: documentosAtivos, carregando } = useDocumentosAtivos();
+
+    const documentos = documentosAtivos
         .filter((documento) => pertenceCategoria(documento.categoriaVetor, categoria))
-        .sort(
-            (a, b) =>
-                new Date(b.createdAt ?? "").getTime() -
-                new Date(a.createdAt ?? "").getTime()
-        )
         .slice(0, 3);
 
     return (
@@ -41,7 +38,13 @@ export function ListaDocumentos({ categoria }: ListaDocumentosProps) {
 
             {/* Lista */}
 
-            {documentos.length === 0 ? (
+            {carregando ? (
+
+                <div className="flex h-40 items-center justify-center">
+                    <span className="loading loading-spinner loading-lg text-indigo-700"></span>
+                </div>
+
+            ) : documentos.length === 0 ? (
 
                 <p className="py-4 text-slate-600">
                     Nenhum documento disponível para este programa.
@@ -49,48 +52,52 @@ export function ListaDocumentos({ categoria }: ListaDocumentosProps) {
 
             ) : (
 
-            <div className="divide-y divide-slate-200">
+                <div className="divide-y divide-slate-200">
 
-                {documentos.map((documento) => (
+                    {documentos.map((documento) => (
 
-                    <button
-                        key={documento.id}
-                        type="button"
-                        className="flex w-full cursor-pointer flex-col py-4 text-left transition-colors hover:bg-slate-50"
-                    >
+                        <Link
+                            key={documento.id}
+                            to={`/documentos/${documento.caminhoURL}`}
+                            className="group flex w-full cursor-pointer flex-col py-4 text-left transition-colors hover:bg-slate-50"
+                        >
 
-                        <span className="text-sm text-slate-500">
-                            {formatarData(documento.createdAt)}
-                        </span>
-
-                        <span className="mt-1 font-semibold text-slate-800 transition-colors hover:text-indigo-700">
-                            {documento.titulo}
-                        </span>
-
-                        <div className="mt-4 flex flex-wrap gap-2">
-
-                            <span className="badge badge-sm border-cyan-300 bg-cyan-50 text-cyan-800">
-                                {documento.categoriaVetor}
+                            <span className="text-sm text-slate-500">
+                                {formatarData(documento.createdAt)}
                             </span>
 
-                            {documento.tags.map((tag) => (
+                            <span className="mt-1 font-semibold text-slate-800 transition-colors group-hover:text-indigo-700">
+                                {documento.titulo}
+                            </span>
 
-                                <span
-                                    key={tag.id}
-                                    className="badge badge-sm badge-outline"
-                                >
-                                    {tag.tag}
-                                </span>
+                            <div className="mt-4 flex flex-wrap gap-2">
 
-                            ))}
+                                {documento.categoriaVetor && (
 
-                        </div>
+                                    <span className="badge badge-sm border-cyan-300 bg-cyan-50 text-cyan-800">
+                                        {documento.categoriaVetor}
+                                    </span>
 
-                    </button>
+                                )}
 
-                ))}
+                                {documento.tags?.map((tag) => (
 
-            </div>
+                                    <span
+                                        key={tag.id}
+                                        className="badge badge-sm badge-outline"
+                                    >
+                                        {tag.tag}
+                                    </span>
+
+                                ))}
+
+                            </div>
+
+                        </Link>
+
+                    ))}
+
+                </div>
 
             )}
 
@@ -98,8 +105,8 @@ export function ListaDocumentos({ categoria }: ListaDocumentosProps) {
 
             <div className="mt-6">
 
-                <a
-                    href="/documentos"
+                <Link
+                    to="/documentos"
                     className="inline-flex items-center gap-2 font-medium text-sky-700 transition-colors hover:text-sky-900"
                 >
 
@@ -107,7 +114,7 @@ export function ListaDocumentos({ categoria }: ListaDocumentosProps) {
 
                     <ArrowRight size={18} />
 
-                </a>
+                </Link>
 
             </div>
 

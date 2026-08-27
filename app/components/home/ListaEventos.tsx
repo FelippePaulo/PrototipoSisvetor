@@ -1,7 +1,8 @@
 import { ArrowRight, CalendarDays } from "lucide-react";
+import { Link } from "react-router";
 import type { CategoriaVetor } from "~/lib/api/enum";
 import { pertenceCategoria } from "~/lib/utils";
-import { eventosMock } from "~/mocks/eventos-mock";
+import { useEventosAtivos } from "~/lib/hooks/useEventosAtivos";
 
 interface ListaEventosProps {
     categoria: CategoriaVetor;
@@ -9,14 +10,12 @@ interface ListaEventosProps {
 
 export function ListaEventos({ categoria }: ListaEventosProps) {
 
-    const eventos = eventosMock
-        .filter((evento) => evento.ativa)
+    const { eventos: eventosAtivos, carregando } = useEventosAtivos();
+
+    const eventos = eventosAtivos
         .filter((evento) => pertenceCategoria(evento.categoriaVetor, categoria))
-        .sort(
-            (a, b) =>
-                new Date(a.dataInicio).getTime() -
-                new Date(b.dataInicio).getTime()
-        )
+        .slice()
+        .sort((a, b) => (a.dataInicio ?? "").localeCompare(b.dataInicio ?? ""))
         .slice(0, 3);
 
     return (
@@ -41,7 +40,13 @@ export function ListaEventos({ categoria }: ListaEventosProps) {
 
             {/* Lista */}
 
-            {eventos.length === 0 ? (
+            {carregando ? (
+
+                <div className="flex h-40 items-center justify-center">
+                    <span className="loading loading-spinner loading-lg text-emerald-700"></span>
+                </div>
+
+            ) : eventos.length === 0 ? (
 
                 <p className="py-4 text-slate-600">
                     Nenhum evento programado para este programa.
@@ -49,39 +54,43 @@ export function ListaEventos({ categoria }: ListaEventosProps) {
 
             ) : (
 
-            <div className="divide-y divide-slate-200">
+                <div className="divide-y divide-slate-200">
 
-                {eventos.map((evento) => (
+                    {eventos.map((evento) => (
 
-                    <button
-                        key={evento.id}
-                        type="button"
-                        className="flex w-full cursor-pointer flex-col py-4 text-left transition-colors hover:bg-slate-50"
-                    >
+                        <Link
+                            key={evento.id}
+                            to={`/eventos/${evento.caminhoURL}`}
+                            className="group flex w-full cursor-pointer flex-col py-4 text-left transition-colors hover:bg-slate-50"
+                        >
 
-                        <span className="text-sm text-slate-500">
-                            {formatarData(evento.dataInicio)}
-                        </span>
+                            <span className="text-sm text-slate-500">
+                                {formatarData(evento.dataInicio)}
+                            </span>
 
-                        <span className="mt-1 font-semibold text-slate-800 transition-colors hover:text-emerald-700">
-                            {evento.nome}
-                        </span>
+                            <span className="mt-1 font-semibold text-slate-800 transition-colors group-hover:text-emerald-700">
+                                {evento.nome}
+                            </span>
 
-                        <span className="mt-2 text-sm text-slate-500">
+                            <span className="mt-2 text-sm text-slate-500">
 
-                            {evento.modalidade}
+                                {evento.modalidade}
 
-                            {evento.local && ` • ${evento.local}`}
+                                {evento.local && ` • ${evento.local}`}
 
-                        </span>
+                            </span>
 
-                        <div className="mt-4 flex flex-wrap gap-2">
+                            <div className="mt-4 flex flex-wrap gap-2">
 
-                                <span className="badge badge-sm border-cyan-300 bg-cyan-50 text-cyan-800">
-                                    {evento.categoriaVetor}
-                                </span>
+                                {evento.categoriaVetor && (
 
-                                {evento.tags.map((tag) => (
+                                    <span className="badge badge-sm border-cyan-300 bg-cyan-50 text-cyan-800">
+                                        {evento.categoriaVetor}
+                                    </span>
+
+                                )}
+
+                                {evento.tags?.map((tag) => (
 
                                     <span
                                         key={tag.id}
@@ -94,11 +103,11 @@ export function ListaEventos({ categoria }: ListaEventosProps) {
 
                             </div>
 
-                    </button>
+                        </Link>
 
-                ))}
+                    ))}
 
-            </div>
+                </div>
 
             )}
 
@@ -106,8 +115,8 @@ export function ListaEventos({ categoria }: ListaEventosProps) {
 
             <div className="mt-6">
 
-                <a
-                    href="/eventos"
+                <Link
+                    to="/eventos"
                     className="inline-flex items-center gap-2 font-medium text-sky-700 transition-colors hover:text-sky-900"
                 >
 
@@ -115,7 +124,7 @@ export function ListaEventos({ categoria }: ListaEventosProps) {
 
                     <ArrowRight size={18} />
 
-                </a>
+                </Link>
 
             </div>
 
@@ -125,9 +134,15 @@ export function ListaEventos({ categoria }: ListaEventosProps) {
 
 }
 
-function formatarData(data: string) {
+function formatarData(data?: string) {
 
-    return new Date(data).toLocaleDateString("pt-BR", {
+    if (!data) return "";
+
+    // LocalDate ("2026-08-20"): monta manualmente para não sofrer deslocamento de fuso.
+    const [ano, mes, dia] = data.split("-").map(Number);
+    if (!ano || !mes || !dia) return "";
+
+    return new Date(ano, mes - 1, dia).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "short",
         year: "numeric",

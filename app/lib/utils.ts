@@ -1,5 +1,4 @@
 import { CategoriaVetor } from "./api/enum";
-
 /**
  * Regra de filtro do seletor de programa de vigilância da home.
  *
